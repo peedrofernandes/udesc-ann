@@ -15,9 +15,9 @@ void print_matrix(double m[numRows][numCols]) {
 // apenas funciona para sistemas n x n
 void gauss(double E[numRows][numCols]) {
   for (int j = 0; j < numCols - 1; j++) { 
-    // percorrer todas as linhas da matriz
+    // percorrer todas as colunas da matriz
     for (int i = j; i < numRows; i++) { 
-      // para cada linha, percorrer todas as colunas a partir da diagonal
+      // percorrer todos os elementos da coluna
 
       if (E[i][j] == 0)
         continue;
@@ -33,7 +33,8 @@ void gauss(double E[numRows][numCols]) {
         }
       }
 
-      for (int k = 0; k < numRows; k++) {
+      for (int k = j; k < numRows; k++) {
+        // percorrer todos os elementos da coluna
         if (k == j)
           continue;
 
@@ -44,17 +45,16 @@ void gauss(double E[numRows][numCols]) {
       } // zerar todos os elementos da coluna j que não estão na diagonal
 
       printf("\n");
-      print_matrix(E);
       break;
     }
   }
 
-  // soluções do sistema
-  printf("\n");
-  for (int i = 0; i < numRows; i++) {
-    double xi = E[i][numCols - 1] / E[i][i];
-    printf("x_%d = %.16lf\t", i + 1, xi);
-  }
+  // // soluções do sistema
+  // printf("\n");
+  // for (int i = 0; i < numRows; i++) {
+  //   double xi = E[i][numCols - 1] / E[i][i];
+  //   printf("x_%d = %.16lf\t", i + 1, xi);
+  // }
 }
 
 int main() {
@@ -65,6 +65,6 @@ int main() {
     {1, 3, -3, -2, 6}
   }; // solução exata: 2, 1, -1, 1
 
-  print_matrix(E);
   gauss(E);
+  print_matrix(E);
 }

@@ -11,8 +11,13 @@ void swap(int nRows, int nCols, double m[nRows][nCols], int l1, int l2);
 
 void multiplyAndSum(int nRows, int nCols, double m[nRows][nCols], int l1, int l2, double k);
 
+void gauss(int nRows, int nCols, double m[nRows][nCols]);
+
+void completeGauss(int nRows, int nCols, double m[nRows][nCols]);
+
 void jacobi(int t, double m[t][t], double c[t], double est[t], int it[], size_t sizeIt);
 
 void seidel(int t, double m[t][t], double c[t], double est[t], int it[], size_t sizeit);
+
 
 #endif
