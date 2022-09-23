@@ -107,3 +107,34 @@ void jacobi(int t, double m[t][t], double c[t], double est[t], int it[], size_t 
   }
   printf("\n");
 }
+
+
+void seidel(int t, double m[t][t], double c[t], double est[t], int it[], size_t sizeIt) {
+  int currentIt = 0;
+
+  for (int k = 1; k <= it[sizeIt - 1]; k++) {
+    double si[t];
+
+    for (int i = 0; i < t; i++) {
+      si[i] = c[i];
+
+      for (int j = 0; j < t; j++) {
+        if (i != j)
+          si[i] -= m[i][j] * est[j];
+      }
+
+      si[i] /= m[i][i];
+      est[i] = si[i];
+    }
+
+    if (it[currentIt] == k) {
+      for (int i = 0; i < t; i++) {
+        printf("%.8lf", si[i]);
+        if (currentIt != sizeIt - 1 || i != t - 1)
+          printf(",");
+      }
+      currentIt++;
+    }
+  }
+  printf("\n");
+}

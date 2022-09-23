@@ -13,4 +13,6 @@ void multiplyAndSum(int nRows, int nCols, double m[nRows][nCols], int l1, int l2
 
 void jacobi(int t, double m[t][t], double c[t], double est[t], int it[], size_t sizeIt);
 
+void seidel(int t, double m[t][t], double c[t], double est[t], int it[], size_t sizeit);
+
 #endif
