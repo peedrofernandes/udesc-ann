@@ -6,15 +6,15 @@ void jacobi(double A[r][r], double B[r], double est[r], int n) {
   double next[r];
 
   for (int k = 0; k < n; k++) {
-    // Para cada iteração
+
     for (int i = 0; i < r; i++) {
-      // Para cada linha
       double bi = B[i];
+
       for (int j = 0; j < r; j++) {
-        // Para cada coluna
         if (j != i)
           bi -= A[i][j] * est[j];
       }
+
       bi /= A[i][i];
 
       printf("x%d^(%d) = %.16lf\t", i + 1, k + 1, bi);
@@ -23,9 +23,11 @@ void jacobi(double A[r][r], double B[r], double est[r], int n) {
     }
     printf("\n");
 
+
     for (int i = 0; i < r; i++)
       est[i] = next[i];
     // atualizar a estimativa
+
   }
 }
 

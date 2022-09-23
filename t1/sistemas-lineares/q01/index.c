@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include "../operations.h"
-#include "../handleMatrix.h"
+#include "../utils.h"
 
 #define R 3
 #define C 3
@@ -15,7 +14,7 @@ int main() {
   printM(R, C, m);
   printf("\n");
 
-  timesK(R, C, m, 2 - 1, 5);
+  multiply(R, C, m, 2 - 1, 5);
 
   printM(R, C, m);
   printf("\n");
