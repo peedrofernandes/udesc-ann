@@ -1,4 +1,6 @@
-import numpy as np
+from numpy import linspace
+from numpy.linalg import solve
+from matplotlib.pyplot import plot, scatter, savefig
 
 
 def vandermonde(x, y):
@@ -14,9 +16,10 @@ def vandermonde(x, y):
     row = [1] + [xi ** k for k in range(1, len(x))]
     A.append(row)
 
-  return np.linalg.solve(A,B)
+  coeffs = solve(A, B)
+  return coeffs
 
-  
+
 def buildPoly(coeffs):
   def func(x):
     soma = coeffs[0]
@@ -26,41 +29,47 @@ def buildPoly(coeffs):
   return func
 
 
-if __name__ == '__main__':
-  # exemplo 1 (1, 2)
-  x = [1,3]
-  y = [2,-1]
+def example1():
+  # Exemplo 1: (1, 2) e (3, -1)
+  x = [1, 3]
+  y = [2, -1]
 
   coeffs = vandermonde(x, y)
 
-  print(coeffs)
+  print(f"Coeficientes do polinômio 1: {coeffs}")
   p = buildPoly(coeffs)
 
   print(f"{p(1) = } e {p(3) = }")
 
-  # Apenas para visualização:
-  import matplotlib.pyplot as plt
-  t = np.linspace(-1, 4, 100)
+  # Visualização
+  t = linspace(-1, 4, 100)
   pt = [p(ti) for ti in t]
-  plt.plot(t, pt, color="red")
-  plt.scatter(x, y, color="blue")
-  plt.savefig("interp.png")
+  plot(t, pt, color="red")
+  scatter(x, y, color="blue")
+  savefig("interp1.png")
 
-  #exemplo 2 (-1, 1), (0, 0), (1, 1)
+
+def example2():
+  # Exemplo 2: (-1, 1), (0, 0) e (1, 1)
   x = [-1, 0, 1]
   y = [1, 0, 1]
   coeffs = vandermonde(x, y)
-  print(coeffs)
   p = buildPoly(coeffs)
   [print(f"p({xi}) = {p(xi)}") for xi in x]
 
-  # Apenas para visualização:
-  import matplotlib.pyplot as plt
-  t = np.linspace(-1, 4, 100)
+  # Visualização
+  vx = 1.1 * min(x)
+  vy = 1.1 * max(x)
+  t = linspace(vx, vy, 100)
   pt = [p(ti) for ti in t]
-  plt.plot(t, pt, color="red")
-  plt.scatter(x, y, color="blue")
-  plt.savefig("interp.png")
+  plot(t, pt, color="red")
+  scatter(x, y, color="blue")
+  savefig("interp2.png")
+
+
+if __name__ == '__main__':
+  example2()
+
 
 
 
