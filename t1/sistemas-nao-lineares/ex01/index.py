@@ -1,0 +1,39 @@
+def f1(x, y):
+  return x ** 2 + 2 * y ** 2 - 3
+def f2(x, y):
+  return 4 * x ** 2 + y ** 2 - 6
+
+def df1x(x, y):
+  return 2 * x
+def df2x(x, y):
+  return 8 * x
+def df1y(x, y):
+  return 4 * y
+def df2y(x, y):
+  return 2 * y
+
+it = [1, 2, 3, 4, 5]
+x0 = 1.4596
+y0 = -1.1891
+
+currentIt = 0
+for i in range(1, it[len(it) - 1] + 1):
+  # Jacobiano:
+  # [df1x df1y]
+  # [df2x df2y]
+  # Inversa:
+  # [df2y -df1y]
+  # [-df2x df1x]
+  det = df1x(x0, y0) * df2y(x0, y0) - df1y(x0, y0) * df2x(x0, y0)
+  xk = x0 - (df2y(x0, y0) * f1(x0, y0) - df1y(x0, y0) * f2(x0, y0)) / det
+  yk = y0 - (-df2x(x0, y0) * f1(x0, y0) + df1x(x0, y0) * f2(x0, y0)) / det
+  x0 = xk
+  y0 = yk
+
+  if i == it[currentIt]:
+    print(f'{xk:.8f},{yk:.8f}', end='')
+    if i != it[len(it) - 1]:
+      print(',', end='')
+    else:
+      print()
+    currentIt += 1
