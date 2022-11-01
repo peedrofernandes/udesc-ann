@@ -1,4 +1,5 @@
 **/*.exe
 **/.history
 **/.vscode
+**/__pycache__/*
 
