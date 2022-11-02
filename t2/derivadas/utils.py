@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from math import factorial
 
 
 def poly_regression(x, y, k = 1):
@@ -22,6 +23,8 @@ def build_poly(coeffs):
     return sum((ci*x**i if (i > 0) else (ci)) for i, ci in enumerate(coeffs))
   return p
 
+def print_value(x):
+  print(f"{x:.8f}")
 
 def print_values(x):
   for i, xi in enumerate(x):
@@ -39,3 +42,19 @@ def generate_png(x, y, p, path):
   plt.scatter(x, y)
   plt.plot(t, pt, color="red")
   plt.savefig(path)
+
+
+def dif_fin(x, x0, k = 1):
+  n = len(x)
+
+  A = [[1] * n]
+  B = [0]
+  for i in range(1, n):
+    row = [xi ** i for xi in x]
+    A.append(row)
+    if i < k:
+      B.append(0)
+    else:
+      B.append(factorial(i) / factorial(i - k) * x0 ** (i - k))
+  
+  return np.linalg.solve(A, B)
