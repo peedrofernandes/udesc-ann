@@ -23,8 +23,10 @@ def build_poly(coeffs):
     return sum((ci*x**i if (i > 0) else (ci)) for i, ci in enumerate(coeffs))
   return p
 
+
 def print_value(x):
   print(f"{x:.8f}")
+
 
 def print_values(x):
   for i, xi in enumerate(x):
@@ -58,3 +60,15 @@ def dif_fin(x, x0, k = 1):
       B.append(factorial(i) / factorial(i - k) * x0 ** (i - k))
   
   return np.linalg.solve(A, B)
+
+
+def richardson(x, b = 1):
+  n = len(x)
+
+  for k in range(1, n):
+    for i in range(n - k):
+      numer = 2 ** (k * b) * x[i + 1] - x[i]
+      denom = 2 ** (k * b) - 1
+      aprox = numer / denom
+      x[i] = aprox
+  return x[0]
